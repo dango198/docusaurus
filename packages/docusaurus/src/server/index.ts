@@ -174,8 +174,8 @@ export default ${JSON.stringify(siteConfig, null, 2)};
 
   const genClientModules = generate(
     generatedFilesDir,
-    'client-modules.js',
-    `export default [
+    'client-modules.cjs',
+    `module.exports = [
 ${clientModules
   // Use `require()` because `import()` is async but client modules can have CSS
   // and the order matters for loading CSS.
@@ -187,8 +187,8 @@ ${clientModules
 
   const genRegistry = generate(
     generatedFilesDir,
-    'registry.js',
-    `export default {
+    'registry.cjs',
+    `module.exports = {
 ${Object.entries(registry)
   .sort((a, b) => a[0].localeCompare(b[0]))
   .map(
@@ -205,7 +205,7 @@ ${Object.entries(registry)
     JSON.stringify(routesChunkNames, null, 2),
   );
 
-  const genRoutes = generate(generatedFilesDir, 'routes.js', routesConfig);
+  const genRoutes = generate(generatedFilesDir, 'routes.mjs', routesConfig);
 
   const genGlobalData = generate(
     generatedFilesDir,
